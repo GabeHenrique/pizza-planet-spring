@@ -1,6 +1,5 @@
 package br.com.pizzaplanet.filter;
 
-import br.com.pizzaplanet.api.service.auth.UserService;
 import br.com.pizzaplanet.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

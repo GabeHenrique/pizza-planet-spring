@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfigurer {
+public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JwtRequestFilter requestFilter) throws Exception {
@@ -28,6 +28,7 @@ public class SecurityConfigurer {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)

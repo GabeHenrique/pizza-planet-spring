@@ -13,5 +13,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    sql: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    br.com.pizzaplanet: DEBUG
+    org.springframework.web: INFO
 security:
   secret-key: "G0s3KJTu1bITnLdVfTnNQ02xP1f6z0k+Z8Y/hJPo2sU="
+  issuer: "Pizza Planet"

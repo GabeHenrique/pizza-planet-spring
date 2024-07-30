@@ -5,7 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,16 +15,18 @@ import java.time.ZoneOffset;
 @Service
 public class JwtUtil {
 
-  private final String secret = "2567a5ec9705eb7ac2c984033e06189d";
-  private final String issuer = "API nuvy";
+  @Value("${security.secret-key}")
+  private String secret;
+  @Value("${security.issuer}")
+  private String issuer;
 
   public String generateToken(User user) {
     try {
       var algorithm = Algorithm.HMAC256(secret);
       return JWT.create()
           .withIssuer(issuer)
-          .withSubject(user.getId().toString())
-          .withExpiresAt(dataExpiracao())
+          .withSubject(String.valueOf(user.getId()))
+          .withExpiresAt(expirationDate())
           .withClaim("id", String.valueOf(user.getId()))
           .withClaim("nome", user.getUsername())
           .sign(algorithm);
@@ -46,7 +48,7 @@ public class JwtUtil {
     }
   }
 
-  private Instant dataExpiracao() {
+  private Instant expirationDate() {
     return LocalDateTime.now().plusYears(10).toInstant(ZoneOffset.of("-03:00"));
   }
 }
