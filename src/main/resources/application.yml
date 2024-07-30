@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: pizza-planet
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pizza-planet?currentSchema=spring
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+security:
+  secret-key: "G0s3KJTu1bITnLdVfTnNQ02xP1f6z0k+Z8Y/hJPo2sU="
